@@ -5,15 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CarRental"
         mc:Ignorable="d"
-        Title="CrNewEmpWindow" Height="638" Width="400" WindowStartupLocation="CenterScreen">
+        Title="Dodawanie pracownika" Height="638" Width="400" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
 
         <TextBox Name="TxB_EmpFirstName" HorizontalAlignment="Center" Height="23" Margin="0,90,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" FontSize="14"/>
         <TextBox Name="TxB_EmpLastName" HorizontalAlignment="Center" Height="23" Margin="0,180,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" FontSize="14"/>
-        <TextBox Name="TxB_EmpPhone" HorizontalAlignment="Center" Height="23" Margin="0,280,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" FontSize="14"/>
+        <TextBox Name="TxB_EmpPhone" HorizontalAlignment="Center" Height="23" Margin="0,280,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" FontSize="14" MaxLength="11"/>
         <CheckBox Name="CheckB_Perm" Content="CheckBox" HorizontalAlignment="Center" Margin="0,370,0,0" VerticalAlignment="Top" FontSize="14"/>
         <TextBox Name="TxB_EmpSalary" HorizontalAlignment="Center" Height="23" Margin="0,460,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" FontSize="14"/>
-        <Label Content="Nowy pracownik" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" FontSize="25"/>
+        <Label Name="label" Content="Nowy pracownik" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" FontSize="25"/>
         <Label Content="Imie" HorizontalAlignment="Center" Margin="0,60,0,0" VerticalAlignment="Top" FontSize="14"/>
         <Label Content="Nazwisko" HorizontalAlignment="Center" Margin="0,150,0,0" VerticalAlignment="Top" FontSize="14"/>
         <Label Content="Telefon" HorizontalAlignment="Center" Margin="0,250,0,0" VerticalAlignment="Top" FontSize="14"/>

@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Win32;
 using System.IO;
+using System.Data.Entity.Migrations;
 
 namespace CarRental
 {
@@ -31,6 +32,7 @@ namespace CarRental
         List<Customers> customersList;
         Customers customer = new Customers();
         Rent rent = new Rent();
+        Cars car = new Cars();
         
 
         public MainWindow(int userId)
@@ -99,6 +101,7 @@ namespace CarRental
         {
             if (LisView_Emp.SelectedIndex>=0)
             {
+                Bt_ModEmp.IsEnabled = true;
                 var item = (ListBox)sender;
                 var emp = (Employees)item.SelectedItem;
                 if(employee.Id_Employee==emp.Id_Employee)
@@ -152,12 +155,21 @@ namespace CarRental
         //wybieranie z listy
         private void ListView_Cars_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            Bt_ChangePrice.IsEnabled = false;
+            TxB_CarPrice.IsEnabled = false;
             if (ListView_Cars.SelectedIndex >= 0)
             {
                 var item = (ListBox)sender;
-                var car = (Cars)item.SelectedItem;
+                car = (Cars)item.SelectedItem;
+                TxB_CarPrice.Text = car.Price.ToString();
                 if (car.Status == "wolny")
+                {
                     Bt_DelCar.IsEnabled = true;
+                    Bt_ChangePrice.IsEnabled = true;
+                    TxB_CarPrice.IsEnabled = true;
+                }
+                    
+                    
                 MessageBox.Show("Nr. rejestracyjny: " + car.Reg_Number + "\n" + "Marka: " + car.Mark + "\n" + "Model: " + car.Model + "\n" + "Przebieg: " + car.Course.ToString() + " km" + "\n" + "Klasa: " + car.Class + "\n" + "Cena: " + car.Price.ToString() + " zł" + "\n" + "Status: " + car.Status);
             }
         }
@@ -174,6 +186,13 @@ namespace CarRental
         {
             AddNewCarWindow addNewCarWindow = new AddNewCarWindow();
             addNewCarWindow.ShowDialog();
+            CarsList();
+        }
+
+        //zmien cene samochodu
+        private void Bt_ChangePrice_Click(object sender, RoutedEventArgs e)
+        {
+            ChangePriceCar();
             CarsList();
         }
 
@@ -252,7 +271,7 @@ namespace CarRental
         /////////// METODY  //////////////////
 
         //wyswietlanioe listy pracownikow
-        public void EmpList()
+        private void EmpList()
         {
             using(CarRentalEntities db=new CarRentalEntities())
             {
@@ -262,7 +281,7 @@ namespace CarRental
         }
 
         //wyswietlanioe listy samochodów
-        public void CarsList()
+        private void CarsList()
         {
             using (CarRentalEntities db = new CarRentalEntities())
             {
@@ -272,7 +291,7 @@ namespace CarRental
         }
 
         //wyswietlanie rezerwacji
-        public void RentList()
+        private void RentList()
         {
             using (CarRentalEntities db = new CarRentalEntities())
             {
@@ -282,7 +301,7 @@ namespace CarRental
         }
 
         //wyswietlanie klientow
-        public void CustomersList()
+        private void CustomersList()
         {
             using (CarRentalEntities db = new CarRentalEntities())
             {
@@ -293,7 +312,7 @@ namespace CarRental
 
 
         //zwalnianie pracownika
-        public void DelEmp()
+        private void DelEmp()
         {
             if (LisView_Emp.SelectedIndex >= 0)
             {
@@ -335,7 +354,7 @@ namespace CarRental
                 }
         }
         //modyfikuj pracownika
-        public void ModEmp()
+        private void ModEmp()
         {
            
                 
@@ -343,13 +362,15 @@ namespace CarRental
                 CrNewEmpWindow crNewEmpWindow = new CrNewEmpWindow(emp.Id_Employee);
                 crNewEmpWindow.Bt_ModEmp.IsEnabled = true;
                 crNewEmpWindow.Bt_CrNewEmp.IsEnabled = false;
+                crNewEmpWindow.label.Content = "Modyfikacja pracownika";
                 crNewEmpWindow.ShowDialog();
+            Bt_ModEmp.IsEnabled = false;
             
         }
 
 
         //usun samochod
-        public void DelCar()
+        private void DelCar()
         {
             if(ListView_Cars.SelectedIndex>=0)
             {
@@ -412,67 +433,84 @@ namespace CarRental
         //export klientow
         private void ExportCust()
         {
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine("Imie,Nazwisko,telefon,Adres,Miejscowość,Nr dowodu");
-            foreach (var item in customersList)
+            try
             {
-                sb.AppendLine($"{item.FirstName},{item.LastName},{item.PhoneNumber},{item.Address},{item.City},{item.Id_Number}");
-            }
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine("Imie,Nazwisko,telefon,Adres,Miejscowość,Nr dowodu");
+                foreach (var item in customersList)
+                {
+                    sb.AppendLine($"{item.FirstName},{item.LastName},{item.PhoneNumber},{item.Address},{item.City},{item.Id_Number}");
+                }
 
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "Text file (*.txt)|*.txt";
-            if (saveFileDialog.ShowDialog() == true)
-                File.WriteAllText(saveFileDialog.FileName, sb.ToString());
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "Text file (*.txt)|*.txt";
+                if (saveFileDialog.ShowDialog() == true)
+                    File.WriteAllText(saveFileDialog.FileName, sb.ToString());
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Błąd!");
+                //throw;
+            }
+            
 
         }
 
         //import klientow
         private void ImportCust()
         {
-            string fileName=null;
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            if (openFileDialog.ShowDialog() == true)
-                 fileName= openFileDialog.FileName;
-
-
-
-            using (var sr = new StreamReader(fileName))
+            try
             {
-                var line = sr.ReadLine();
-                int i = 0;
-                while (line!=null)
+                string fileName = null;
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                if (openFileDialog.ShowDialog() == true)
+                    fileName = openFileDialog.FileName;
+
+
+
+                using (var sr = new StreamReader(fileName))
                 {
-                    if (i!=0)
+                    var line = sr.ReadLine();
+                    int i = 0;
+                    while (line != null)
                     {
-                        string[] splited = line.Split(',');
-                        customer.FirstName = splited[0];
-                        customer.LastName = splited[1];
-                        customer.PhoneNumber = int.Parse(splited[2]);
-                        customer.Address = splited[3];
-                        customer.City = splited[4];
-                        customer.Id_Number = splited[5];
-                        using (CarRentalEntities db=new CarRentalEntities())
+                        if (i != 0)
                         {
-                            db.Customers.Add(customer);
-                            db.SaveChanges();
+                            string[] splited = line.Split(',');
+                            customer.FirstName = splited[0];
+                            customer.LastName = splited[1];
+                            customer.PhoneNumber = int.Parse(splited[2]);
+                            customer.Address = splited[3];
+                            customer.City = splited[4];
+                            customer.Id_Number = splited[5];
+                            using (CarRentalEntities db = new CarRentalEntities())
+                            {
+                                db.Customers.Add(customer);
+                                db.SaveChanges();
+                            }
+
+                            //customersList.Add(new Customers()
+                            //{
+                            //    FirstName=splited[0],
+                            //    LastName=splited[1],
+                            //    PhoneNumber=int.Parse(splited[2]),
+                            //    Address=splited[3],
+                            //    City=splited[4],
+                            //    Id_Number=splited[5]
+
+                            //});
                         }
-
-                        //customersList.Add(new Customers()
-                        //{
-                        //    FirstName=splited[0],
-                        //    LastName=splited[1],
-                        //    PhoneNumber=int.Parse(splited[2]),
-                        //    Address=splited[3],
-                        //    City=splited[4],
-                        //    Id_Number=splited[5]
-
-                        //});
+                        i++;
+                        line = sr.ReadLine();
                     }
-                    i++;
-                    line = sr.ReadLine();
                 }
-            }
 
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Błąd!");
+                //throw;
+            }
 
             CustomersList();
         }
@@ -480,7 +518,7 @@ namespace CarRental
 
 
         //usowanie klienta
-        public void DelCust()
+        private void DelCust()
         {
             bool Check = false;
             if (LisView_Customser.SelectedIndex >= 0)
@@ -536,6 +574,36 @@ namespace CarRental
 
             }
             Bt_DelCust.IsEnabled = false;
+        }
+
+        //zmiana ceny samohcodu
+        private void ChangePriceCar()
+        {
+            if (String.IsNullOrWhiteSpace(TxB_CarPrice.Text))
+            {
+                MessageBox.Show("Podaj cenę!");
+            }
+            else
+            {
+                try
+                {
+                    car.Price = double.Parse(TxB_CarPrice.Text);
+                    using (CarRentalEntities db=new CarRentalEntities())
+                    {
+                        db.Cars.AddOrUpdate(car);
+                        db.SaveChanges();
+                    }
+                    TxB_CarPrice.Text = null;
+                    Bt_ChangePrice.IsEnabled = false;
+                    TxB_CarPrice.IsEnabled = false;
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    //throw;
+                }
+            }
         }
 
         

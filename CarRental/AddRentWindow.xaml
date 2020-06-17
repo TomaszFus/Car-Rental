@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CarRental"
         mc:Ignorable="d"
-        Title="AddRentWindow" Height="1027.612" Width="605.224" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="Nowe wypożyczenie" Height="1027.612" Width="605.224" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
         <Label Content="Nowy wypożycznie" HorizontalAlignment="Center" Margin="0,31,0,0" VerticalAlignment="Top" FontSize="20"/>
         <RadioButton Name="Radio_NewCust" Content="Nowy klient" HorizontalAlignment="Left" Margin="146,119,0,0" VerticalAlignment="Top" FontSize="14" Checked="Radio_NewCust_Checked"/>
@@ -17,7 +17,7 @@
         <TextBox Name="TxB_CustLastName" IsEnabled="False" HorizontalAlignment="Left" Height="23" Margin="304,269,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontSize="14"/>
         <Label Name="Lb_LNameError" Content="Label" HorizontalAlignment="Left" Margin="306,292,0,0" VerticalAlignment="Top" Foreground="Red" Visibility="Collapsed"/>
         <Label Content="Telefon" HorizontalAlignment="Left" Margin="169,337,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <TextBox Name="TxB_CustPhone" IsEnabled="False" HorizontalAlignment="Left" Height="23" Margin="304,340,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontSize="14"/>
+        <TextBox Name="TxB_CustPhone" IsEnabled="False" HorizontalAlignment="Left" Height="23" Margin="304,340,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontSize="14" MaxLength="11"/>
         <Label Name="Lb_PhoneError" Content="Label" HorizontalAlignment="Left" Margin="304,363,0,0" VerticalAlignment="Top" Foreground="Red" Visibility="Collapsed"/>
         <Label Content="Adres" HorizontalAlignment="Left" Margin="169,415,0,0" VerticalAlignment="Top" FontSize="14"/>
         <TextBox Name="TxB_CustAddress" IsEnabled="False" HorizontalAlignment="Left" Height="23" Margin="306,418,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontSize="14"/>
@@ -26,7 +26,7 @@
         <TextBox Name="TxB_CustCity" IsEnabled="False" HorizontalAlignment="Left" Height="23" Margin="304,505,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontSize="14"/>
         <Label Name="Lb_CityError" Content="Label" HorizontalAlignment="Left" Margin="306,528,0,0" VerticalAlignment="Top" Foreground="Red" Visibility="Collapsed"/>
         <Label Content="Nr. dowodu" HorizontalAlignment="Left" Margin="169,588,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <TextBox Name="TxB_CustIdNum" IsEnabled="False" HorizontalAlignment="Left" Height="23" Margin="304,592,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontSize="14"/>
+        <TextBox Name="TxB_CustIdNum" IsEnabled="False" HorizontalAlignment="Left" Height="23" Margin="304,592,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontSize="14" MaxLength="9"/>
         <Label Name="Lb_IdNumError" Content="Label" HorizontalAlignment="Left" Margin="306,615,0,0" VerticalAlignment="Top" Foreground="Red" Visibility="Collapsed"/>
         <Label Content="Samochód" HorizontalAlignment="Left" Margin="176,668,0,0" VerticalAlignment="Top" FontSize="14"/>
         <TextBox Name="TxB_CarReg_Number" HorizontalAlignment="Left" Height="23" Margin="304,668,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" FontSize="14" IsReadOnly="True"/>
@@ -39,7 +39,7 @@
         <Label Name="Lb_EndDateError" Content="Label" HorizontalAlignment="Left" Margin="304,835,0,0" VerticalAlignment="Top" Foreground="Red" Visibility="Collapsed"/>
         <Label Content="Koszt" HorizontalAlignment="Left" Margin="176,874,0,0" VerticalAlignment="Top" FontSize="14"/>
         <TextBox Name="TxB_Cost" HorizontalAlignment="Left" Height="23" Margin="306,878,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" FontSize="14" IsReadOnly="True"/>
-        <Button Name="Bt_Rent" Content="Button" HorizontalAlignment="Center" Margin="0,947,0,0" VerticalAlignment="Top" Width="75" FontSize="14" Click="Bt_Rent_Click"/>
+        <Button Name="Bt_Rent" Content="Wypożycz" HorizontalAlignment="Center" Margin="0,947,0,0" VerticalAlignment="Top" Width="75" FontSize="14" Click="Bt_Rent_Click"/>
 
 
 

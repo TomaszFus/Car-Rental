@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CarRental"
         mc:Ignorable="d"
-        Title="MainWindow" Height="460" Width="800" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
+        Title="Wypożyczalnia samochodów" Height="460" Width="800" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid Background="White">
         <Grid Width="160" HorizontalAlignment="Left" Background="#6369C0">
 
@@ -17,7 +17,7 @@
 
         <!--    1   -->
         <Grid Name="Grid_1" HorizontalAlignment="Stretch" Margin="160,0,0,0" Background="White" Visibility="Hidden">
-            <ListView Name="ListView_Cars" HorizontalAlignment="Left" Height="345" Margin="90,23,0,0" VerticalAlignment="Top" Width="457" SelectionChanged="ListView_Cars_SelectionChanged">
+            <ListView Name="ListView_Cars" HorizontalAlignment="Left" Height="345" Margin="10,10,0,0" VerticalAlignment="Top" Width="457" SelectionChanged="ListView_Cars_SelectionChanged">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Nr. rejestracyjny" Width="90" DisplayMemberBinding="{Binding Path=Reg_Number}"/>
@@ -28,14 +28,17 @@
                     </GridView>
                 </ListView.View>
             </ListView>
-            <Button Name="Bt_AddCar" Content="Dodaj samochód" HorizontalAlignment="Left" Margin="167,386,0,0" VerticalAlignment="Top" Width="120" FontSize="14" Click="Bt_AddCar_Click"/>
-            <Button Name="Bt_DelCar" Content="Usuń samochód" HorizontalAlignment="Left" Margin="362,386,0,0" VerticalAlignment="Top" Width="120" FontSize="14" Click="Bt_DelCar_Click" IsEnabled="False"/>
+            <Button Name="Bt_AddCar" Content="Dodaj samochód" HorizontalAlignment="Left" Margin="85,386,0,0" VerticalAlignment="Top" Width="120" FontSize="14" Click="Bt_AddCar_Click"/>
+            <Button Name="Bt_DelCar" Content="Usuń samochód" HorizontalAlignment="Left" Margin="269,386,0,0" VerticalAlignment="Top" Width="120" FontSize="14" Click="Bt_DelCar_Click" IsEnabled="False"/>
+            <Label Content="Cena" HorizontalAlignment="Left" Margin="530,86,0,0" VerticalAlignment="Top" FontSize="14"/>
+            <TextBox Name="TxB_CarPrice" HorizontalAlignment="Left" Height="23" Margin="492,120,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" FontSize="14" IsEnabled="False"/>
+            <Button Name="Bt_ChangePrice" Content="Zmień" HorizontalAlignment="Left" Margin="515,160,0,0" VerticalAlignment="Top" Width="75" FontSize="14" IsEnabled="False" Click="Bt_ChangePrice_Click"/>
 
 
         </Grid>
 
         <!--    2   -->
-        <Grid Name="Grid_2" HorizontalAlignment="Stretch" Margin="160,0,0,0" Background="White" Visibility="Hidden">
+        <Grid Name="Grid_2" HorizontalAlignment="Stretch" Margin="160,0,0,0" Background="White" Visibility="Visible">
             <TabControl HorizontalAlignment="Left" Height="429" VerticalAlignment="Top" Width="632">
                 <TabItem Header="Pracownicy">
                     <Grid Background="White">
@@ -69,9 +72,9 @@
                                 </GridView>
                             </ListView.View>
                         </ListView>
-                        <Button Name="Bt_Export" Content="Export" HorizontalAlignment="Left" Margin="144,360,0,0" VerticalAlignment="Top" Width="90" FontSize="14" Click="Bt_Export_Click"/>
-                        <Button Name="Bt_Import" Content="Import" HorizontalAlignment="Left" Margin="295,360,0,0" VerticalAlignment="Top" Width="90" FontSize="14" Click="Bt_Import_Click"/>
-                        <Button Name="Bt_DelCust" Content="Usun klienta" HorizontalAlignment="Left" Margin="425,360,0,0" VerticalAlignment="Top" Width="90" FontSize="14" IsEnabled="False" Click="Bt_DelCust_Click"/>
+                        <Button Name="Bt_Export" Content="Export" HorizontalAlignment="Left" Margin="131,360,0,0" VerticalAlignment="Top" Width="90" FontSize="14" Click="Bt_Export_Click"/>
+                        <Button Name="Bt_Import" Content="Import" HorizontalAlignment="Left" Margin="286,360,0,0" VerticalAlignment="Top" Width="90" FontSize="14" Click="Bt_Import_Click"/>
+                        <Button Name="Bt_DelCust" Content="Usun klienta" HorizontalAlignment="Left" Margin="437,360,0,0" VerticalAlignment="Top" Width="90" FontSize="14" IsEnabled="False" Click="Bt_DelCust_Click"/>
                     </Grid>
                 </TabItem>
             </TabControl>
@@ -83,20 +86,20 @@
 
         <!--    3   -->
         <Grid Name="Grid_3" HorizontalAlignment="Stretch" Margin="160,0,0,0" Background="White" Visibility="Hidden">
-            <ListView Name="ListView_Rent" HorizontalAlignment="Left" Height="311" Margin="49,41,0,0" VerticalAlignment="Top" Width="413" SelectionChanged="ListView_Rent_SelectionChanged">
+            <ListView Name="ListView_Rent" HorizontalAlignment="Center" Height="311" Margin="0,38,0,0" VerticalAlignment="Top" Width="448" SelectionChanged="ListView_Rent_SelectionChanged">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Id" Width="50" DisplayMemberBinding="{Binding Path=Id_Rent}"/>
                         <GridViewColumn Header="Klient" Width="50" DisplayMemberBinding="{Binding Path=CustomerID}"/>
                         <GridViewColumn Header="Nr. rejestracyjny" Width="100" DisplayMemberBinding="{Binding Path=Reg_Number}"/>
-                        <GridViewColumn Header="Początek" Width="90" DisplayMemberBinding="{Binding Path=StartDate}"/>
-                        <GridViewColumn Header="Koniec" Width="90" DisplayMemberBinding="{Binding Path=EndDate}"/>
+                        <GridViewColumn Header="Początek" Width="100" DisplayMemberBinding="{Binding Path=StartDate}"/>
+                        <GridViewColumn Header="Koniec" Width="100" DisplayMemberBinding="{Binding Path=EndDate}"/>
                     </GridView>
                 </ListView.View>
             </ListView>
 
-            <Button Name="Bt_NewRent" Content="Nowe wynajęcie" HorizontalAlignment="Left" Margin="67,383,0,0" VerticalAlignment="Top" Width="120" FontSize="14" Click="Bt_NewRent_Click"/>
-            <Button Name="Bt_EndRent" Content="Zakończ" HorizontalAlignment="Left" Margin="223,383,0,0" VerticalAlignment="Top" Width="120" FontSize="14" Click="Bt_EndRent_Click" IsEnabled="False"/>
+            <Button Name="Bt_NewRent" Content="Nowe wypożyczenie" HorizontalAlignment="Left" Margin="173,383,0,0" VerticalAlignment="Top" Width="150" FontSize="14" Click="Bt_NewRent_Click"/>
+            <Button Name="Bt_EndRent" Content="Zakończ" HorizontalAlignment="Left" Margin="345,383,0,0" VerticalAlignment="Top" Width="120" FontSize="14" Click="Bt_EndRent_Click" IsEnabled="False"/>
 
         </Grid>
 

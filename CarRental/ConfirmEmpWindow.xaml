@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CarRental"
         mc:Ignorable="d"
-        Title="ConfirmEmpWindow" Height="398.168" Width="321.728" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="Rejestracja pracownika" Height="398.168" Width="321.728" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
         <TextBox Name="TxB_EmpLogin" HorizontalAlignment="Left" Height="23" Margin="50,177,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False" FontSize="14"/>
         <PasswordBox Name="PassBox_Emp" HorizontalAlignment="Left" Margin="50,267,0,0" VerticalAlignment="Top" Width="120" IsEnabled="False" FontSize="14"/>

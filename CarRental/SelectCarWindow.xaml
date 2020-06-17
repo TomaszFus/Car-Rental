@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CarRental"
         mc:Ignorable="d"
-        Title="SelectCarWindow" Height="410" Width="297">
+        Title="Wybierz samochód" Height="410" Width="297" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
         <ListView Name="ListView_SelCar" HorizontalAlignment="Center" Height="295" Margin="0,23,0,0" VerticalAlignment="Top" Width="250" SelectionChanged="ListView_SelCust_SelectionChanged" FontSize="14">
             <ListView.View>

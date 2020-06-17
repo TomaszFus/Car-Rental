@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CarRental"
         mc:Ignorable="d"
-        Title="AddNewCarWindow" Height="735.079" Width="404.189" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="Dodawanie samochodu" Height="735.079" Width="404.189" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
-        <TextBox Name="TxB_RNumber" HorizontalAlignment="Center" Height="23" Margin="0,90,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" FontSize="14"/>
+        <TextBox Name="TxB_RNumber" HorizontalAlignment="Center" Height="23" Margin="0,90,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" FontSize="14" MaxLength="10"/>
         <TextBox Name="TxB_Mark" HorizontalAlignment="Center" Height="23" Margin="0,180,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" FontSize="14"/>
         <TextBox Name="TxB_Model" HorizontalAlignment="Center" Height="23" Margin="0,280,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" FontSize="14"/>
         <TextBox Name="TxB_Course" HorizontalAlignment="Center" Height="23" Margin="0,381,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" FontSize="14"/>

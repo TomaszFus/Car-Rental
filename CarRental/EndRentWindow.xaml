@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CarRental"
         mc:Ignorable="d"
-        Title="EndRentWindow" Height="615.491" Width="390.053" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="Kończenie wypożyczenia" Height="615.491" Width="390.053" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
         <Label Content="Szczegóły" HorizontalAlignment="Center" Margin="0,17,0,0" VerticalAlignment="Top" FontSize="20"/>
         <Label Content="Imie" HorizontalAlignment="Left" Margin="46,66,0,0" VerticalAlignment="Top" FontSize="14"/>
