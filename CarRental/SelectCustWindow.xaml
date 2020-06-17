@@ -1,0 +1,21 @@
+﻿<Window x:Class="CarRental.SelectCustWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CarRental"
+        mc:Ignorable="d"
+        Title="Wybór klienta" Height="410" Width="220" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid>
+        <ListView Name="ListView_SelCust" HorizontalAlignment="Center" Height="295" Margin="0,23,0,0" VerticalAlignment="Top" Width="170" SelectionChanged="ListView_SelCust_SelectionChanged" FontSize="14">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Imie" Width="80" DisplayMemberBinding="{Binding Path=FirstName}"/>
+                    <GridViewColumn Header="Nazwisko" Width="80" DisplayMemberBinding="{Binding Path=LastName}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Name="Bt_SelectCust" Content="Wybierz" HorizontalAlignment="Center" Margin="0,340,0,0" VerticalAlignment="Top" Width="75" IsEnabled="False" Click="Bt_SelectCust_Click" FontSize="14"/>
+
+    </Grid>
+</Window>

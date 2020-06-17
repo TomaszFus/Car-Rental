@@ -1,0 +1,35 @@
+﻿<Window x:Class="CarRental.EndRentWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CarRental"
+        mc:Ignorable="d"
+        Title="EndRentWindow" Height="615.491" Width="390.053" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid>
+        <Label Content="Szczegóły" HorizontalAlignment="Center" Margin="0,17,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <Label Content="Imie" HorizontalAlignment="Left" Margin="46,66,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="Nazwisko" HorizontalAlignment="Left" Margin="46,105,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="Nr. rejestracyjny" HorizontalAlignment="Left" Margin="46,149,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="Marka" HorizontalAlignment="Left" Margin="46,194,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="Model" HorizontalAlignment="Left" Margin="46,239,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <TextBox Name="TxB_CustFName" HorizontalAlignment="Left" Height="23" Margin="218,66,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" IsReadOnly="True" FontSize="14"/>
+        <TextBox Name="TxB_CustLName" HorizontalAlignment="Left" Height="23" Margin="218,105,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" IsReadOnly="True" FontSize="14"/>
+        <TextBox Name="TxB_CarNr" HorizontalAlignment="Left" Height="23" Margin="218,149,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" IsReadOnly="True" FontSize="14"/>
+        <TextBox Name="TxB_CarMark" HorizontalAlignment="Left" Height="23" Margin="218,194,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" IsReadOnly="True" FontSize="14"/>
+        <TextBox Name="TxB_CarModel" HorizontalAlignment="Left" Height="23" Margin="218,239,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" IsReadOnly="True" FontSize="14"/>
+        <Label Content="Data zwrotu" HorizontalAlignment="Left" Margin="46,334,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <TextBox Name="TxB_TodayDate" HorizontalAlignment="Left" Height="23" Margin="218,334,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" FontSize="14" IsReadOnly="True"/>
+        <Label Content="Planowana data zwrotu" HorizontalAlignment="Left" Margin="46,282,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <TextBox Name="TxB_PlanEndDate" HorizontalAlignment="Left" Height="23" Margin="218,288,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" FontSize="14" IsReadOnly="True"/>
+        <Label Content="Koszt" HorizontalAlignment="Left" Margin="46,382,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <TextBox Name="TxB_EndCost" HorizontalAlignment="Left" Height="23" Margin="218,388,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" FontSize="14" IsReadOnly="True"/>
+        <Label Content="Do zapłaty" HorizontalAlignment="Left" Margin="46,430,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <TextBox Name="TxB_ToPay" HorizontalAlignment="Left" Height="23" Margin="218,434,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" FontSize="14" IsReadOnly="True"/>
+        <Button Name="Bt_End" Content="Zakończ" HorizontalAlignment="Left" Margin="144,547,0,0" VerticalAlignment="Top" Width="96" Click="Bt_End_Click"/>
+        <Label Content="Przebyty dystans" HorizontalAlignment="Left" Margin="46,472,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <TextBox Name="TxB_Distance" HorizontalAlignment="Left" Height="23" Margin="218,476,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" FontSize="14"/>
+        <Label Name="Lb_DistanceError" Content="Label" HorizontalAlignment="Left" Margin="218,499,0,0" VerticalAlignment="Top" Foreground="Red" Visibility="Collapsed"/>
+
+    </Grid>
+</Window>

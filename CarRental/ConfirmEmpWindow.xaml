@@ -1,0 +1,23 @@
+﻿<Window x:Class="CarRental.ConfirmEmpWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CarRental"
+        mc:Ignorable="d"
+        Title="ConfirmEmpWindow" Height="398.168" Width="321.728" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid>
+        <TextBox Name="TxB_EmpLogin" HorizontalAlignment="Left" Height="23" Margin="50,177,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False" FontSize="14"/>
+        <PasswordBox Name="PassBox_Emp" HorizontalAlignment="Left" Margin="50,267,0,0" VerticalAlignment="Top" Width="120" IsEnabled="False" FontSize="14"/>
+        <Button Name="Bt_Confirm" Content="Zawtierdź" HorizontalAlignment="Left" Margin="127,315,0,0" VerticalAlignment="Top" Width="75" Click="Bt_Confirm_Click" IsEnabled="False" FontSize="14"/>
+        <Label Content="Login" HorizontalAlignment="Left" Margin="50,148,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="Hasło" HorizontalAlignment="Left" Margin="50,238,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <TextBox Name="TxB_LastName" HorizontalAlignment="Left" Height="23" Margin="50,91,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" FontSize="14"/>
+        <Button Name="Bt_Find" Content="Szukaj" HorizontalAlignment="Left" Margin="216,91,0,0" VerticalAlignment="Top" Width="75" Click="Bt_Find_Click" FontSize="14"/>
+        <Label Name="Lb_LoginError" Content="Label" HorizontalAlignment="Left" Margin="50,200,0,0" VerticalAlignment="Top" Foreground="Red" Visibility="Collapsed"/>
+        <Label Name="Lb_PassError" Content="Label" HorizontalAlignment="Left" Margin="50,288,0,0" VerticalAlignment="Top" Foreground="Red" Visibility="Collapsed"/>
+        <Label Content="Podaj nazwisko" HorizontalAlignment="Left" Margin="50,62,0,0" VerticalAlignment="Top" FontSize="14"/>
+
+
+    </Grid>
+</Window>
