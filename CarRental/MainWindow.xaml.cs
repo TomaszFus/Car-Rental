@@ -28,7 +28,10 @@ namespace CarRental
         List<Employees> empList;
         List<Cars> carsList;
         List<Rent> rentList;
+        List<Customers> customersList;
+        Customers customer = new Customers();
         Rent rent = new Rent();
+        
 
         public MainWindow(int userId)
         {
@@ -53,6 +56,7 @@ namespace CarRental
             EmpList();
             CarsList();
             RentList();
+            CustomersList();
         }
 
         private void Bt_Grid1_Click(object sender, RoutedEventArgs e)
@@ -185,6 +189,7 @@ namespace CarRental
             addRentWindow.ShowDialog();
             RentList();
             CarsList();
+            CustomersList();
         }
 
 
@@ -201,12 +206,48 @@ namespace CarRental
         }
 
 
+        //wybor klienta
+        private void LisView_Customser_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (LisView_Customser.SelectedIndex >= 0)
+            {
+                Bt_DelCust.IsEnabled = true;
+                var item = (ListBox)sender;
+                customer = (Customers)item.SelectedItem;
+
+            }
+        }
+
         //zakoncz wypozycznie
 
         private void Bt_EndRent_Click(object sender, RoutedEventArgs e)
         {
             EndRent();
         }
+
+
+        //export klientow
+        private void Bt_Export_Click(object sender, RoutedEventArgs e)
+        {
+            ExportCust();
+        }
+        //import klientow
+        private void Bt_Import_Click(object sender, RoutedEventArgs e)
+        {
+            ImportCust();
+        }
+
+
+        //usuniecie klienta
+        private void Bt_DelCust_Click(object sender, RoutedEventArgs e)
+        {
+            DelCust();
+            CustomersList();
+        }
+
+
+
+
 
         /////////// METODY  //////////////////
 
@@ -237,6 +278,16 @@ namespace CarRental
             {
                 rentList = db.Rent.ToList();
                 ListView_Rent.ItemsSource = rentList;
+            }
+        }
+
+        //wyswietlanie klientow
+        public void CustomersList()
+        {
+            using (CarRentalEntities db = new CarRentalEntities())
+            {
+                customersList = db.Customers.ToList();
+                LisView_Customser.ItemsSource = customersList;
             }
         }
 
@@ -310,16 +361,16 @@ namespace CarRental
                         using (CarRentalEntities db = new CarRentalEntities())
                         {
                             var carToDel = (from item in db.Cars where item.Reg_Number == selectedCar.Reg_Number select item).First();
-                            if (carToDel != null)
+                            if (carToDel != null && carToDel.Status!="zajęty")
                             {
                                 db.Cars.Remove(carToDel);
                             }
                             db.SaveChanges();
                         }
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show("Nie można usunąć wynajętego samochodu");
                         //throw;
                     }
                     
@@ -330,9 +381,10 @@ namespace CarRental
                 }
 
             }
+            Bt_DelCar.IsEnabled = false;
         }
 
-
+        //zakonczenie wypozyczenia
         private void EndRent()
         {
             DateTime today = DateTime.Today;
@@ -356,14 +408,137 @@ namespace CarRental
 
         }
 
-        private void Bt_Export_Click(object sender, RoutedEventArgs e)
+
+        //export klientow
+        private void ExportCust()
         {
-            string txtEditor;
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("Imie,Nazwisko,telefon,Adres,Miejscowość,Nr dowodu");
+            foreach (var item in customersList)
+            {
+                sb.AppendLine($"{item.FirstName},{item.LastName},{item.PhoneNumber},{item.Address},{item.City},{item.Id_Number}");
+            }
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Text file (*.txt)|*.txt";
+            if (saveFileDialog.ShowDialog() == true)
+                File.WriteAllText(saveFileDialog.FileName, sb.ToString());
+
+        }
+
+        //import klientow
+        private void ImportCust()
+        {
+            string fileName=null;
             OpenFileDialog openFileDialog = new OpenFileDialog();
             if (openFileDialog.ShowDialog() == true)
-                txtEditor = File.ReadAllText(openFileDialog.FileName);
-            
+                 fileName= openFileDialog.FileName;
+
+
+
+            using (var sr = new StreamReader(fileName))
+            {
+                var line = sr.ReadLine();
+                int i = 0;
+                while (line!=null)
+                {
+                    if (i!=0)
+                    {
+                        string[] splited = line.Split(',');
+                        customer.FirstName = splited[0];
+                        customer.LastName = splited[1];
+                        customer.PhoneNumber = int.Parse(splited[2]);
+                        customer.Address = splited[3];
+                        customer.City = splited[4];
+                        customer.Id_Number = splited[5];
+                        using (CarRentalEntities db=new CarRentalEntities())
+                        {
+                            db.Customers.Add(customer);
+                            db.SaveChanges();
+                        }
+
+                        //customersList.Add(new Customers()
+                        //{
+                        //    FirstName=splited[0],
+                        //    LastName=splited[1],
+                        //    PhoneNumber=int.Parse(splited[2]),
+                        //    Address=splited[3],
+                        //    City=splited[4],
+                        //    Id_Number=splited[5]
+
+                        //});
+                    }
+                    i++;
+                    line = sr.ReadLine();
+                }
+            }
+
+
+            CustomersList();
         }
+
+
+
+        //usowanie klienta
+        public void DelCust()
+        {
+            bool Check = false;
+            if (LisView_Customser.SelectedIndex >= 0)
+            {
+                Bt_DelCust.IsEnabled = true;
+                var cust = (Customers)LisView_Customser.SelectedItem;
+
+
+
+                if (MessageBox.Show("Na pewno chceszusunąć klienta?", "Potwierdzenie", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    try
+                    {
+                        using (CarRentalEntities db = new CarRentalEntities())
+                        {
+
+                            var custToDelete = (from item in db.Customers where item.Id_Customer == cust.Id_Customer select item).First();
+                            foreach (var item in rentList)
+                            {
+                                if (item.CustomerID==custToDelete.Id_Customer)
+                                {
+                                    Check = false;
+                                    break;
+                                }
+                                else
+                                    Check = true;
+                            }
+
+                            if (custToDelete != null && Check==true)
+                            {
+                                db.Customers.Remove(custToDelete);
+                                
+                                db.SaveChanges();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Nie można usunąć klienta, który wypożycza auto");
+                            }
+                            
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                        //throw;
+                    }
+                }
+
+
+            }
+            else
+            {
+
+            }
+            Bt_DelCust.IsEnabled = false;
+        }
+
+        
     }
 
         
